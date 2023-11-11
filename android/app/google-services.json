@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "587711548592",
+    "project_id": "hybrid-14b91",
+    "storage_bucket": "hybrid-14b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587711548592:android:f1ed5b1f3fb0d802caff75",
+        "android_client_info": {
+          "package_name": "com.meesalapavan.hybrid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgoyYEYyFM1HWijnUFcJg0jHK6JPG0Vdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
