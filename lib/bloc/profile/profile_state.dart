@@ -16,7 +16,7 @@ final class ProfileDoesNotExists extends ProfileState {}
 
 final class ProfileLoaded extends ProfileState {
   final UserModel userModel;
-  ProfileLoaded({required this.userModel});
+  const ProfileLoaded({required this.userModel});
 }
 
 final class ProfileFailed extends ProfileState {

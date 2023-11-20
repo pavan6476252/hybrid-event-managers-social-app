@@ -33,6 +33,7 @@ class UserModel {
       this.following,
   });
 
+  
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'userId': userId,
@@ -43,14 +44,15 @@ class UserModel {
       'profileImageUrl': profileImageUrl,
       'coverImageUrl': coverImageUrl,
       'phoneNumber': phoneNumber,
-      'geoPoint': geoPoint,
+      'geoPoint': geoPoint != null
+          ? {'latitude': geoPoint!.latitude, 'longitude': geoPoint!.longitude}
+          : null,
       'birthdate': birthdate?.millisecondsSinceEpoch,
       'followers': followers,
       'following': following,
     };
   }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       userId: map['userId'] as String,
       username: map['username'] != null ? map['username'] as String : null,
@@ -64,7 +66,12 @@ class UserModel {
           map['coverImageUrl'] != null ? map['coverImageUrl'] as String : null,
       phoneNumber:
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
-      geoPoint: map['geoPoint'] != null ? map['geoPoint'] as GeoPoint : null,
+      geoPoint: map['geoPoint'] != null
+          ? GeoPoint(
+              (map['geoPoint'] as Map<String, dynamic>)['latitude'] as double,
+              (map['geoPoint'] as Map<String, dynamic>)['longitude'] as double,
+            )
+          : null,
       birthdate: map['birthdate'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['birthdate'] as int)
           : null,
@@ -76,11 +83,10 @@ class UserModel {
           : null,
     );
   }
-
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(Map<String, dynamic> source) =>
+      UserModel.fromMap(source);
 
   UserModel copyWith({
     String? userId,
@@ -110,5 +116,10 @@ class UserModel {
       followers: followers ?? this.followers,
       following: following ?? this.following,
     );
+  }
+
+  @override
+  String toString() {
+    return 'UserModel(userId: $userId, username: $username, fullName: $fullName, email: $email, bio: $bio, profileImageUrl: $profileImageUrl, coverImageUrl: $coverImageUrl, phoneNumber: $phoneNumber, geoPoint: $geoPoint, birthdate: $birthdate, followers: $followers, following: $following)';
   }
 }

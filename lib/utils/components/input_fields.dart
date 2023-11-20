@@ -93,18 +93,21 @@ class CustomInputFields {
     }
   }
 
-  static genderInputField(
-      {required BuildContext context,
-      required String hintText,
-      required VoidCallback onTap,
-      double? radius,
-      TextEditingController? controller,
-      String? title}) {
+  static diabledInputField({
+    required BuildContext context,
+    required String hintText,
+    required VoidCallback onTap,
+    double? radius,
+    TextEditingController? controller,
+    String? title,
+    Icon? icon,
+  }) {
     GestureDetector textFormField = GestureDetector(
       onTap: onTap,
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
+            suffixIcon: icon,
             enabled: false,
             filled: true,
             border: OutlineInputBorder(

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hybrid/bloc/bloc_observer.dart';
 import 'package:hybrid/bloc/theme/theme_cubit.dart';
+import 'package:hybrid/features/auth/user_details_gather.dart';
 import 'package:hybrid/firebase_options.dart';
 
 import 'package:hybrid/utils/router.dart';
@@ -81,10 +82,14 @@ class MyAppView extends StatelessWidget {
                 ? Brightness.dark
                 : Brightness.light;
         print(themeMode);
+
+        // return MaterialApp(
+// home: UserDetailsGatheringScreen(),
+        // );
         return MaterialApp.router(
           routerConfig: AppRouter.goRouter(context.watch<AuthBloc>()),
           theme: ThemeData(brightness: themeMode),
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.light);
           // theme: PTheme.lightTheme,
           // darkTheme: PTheme.darkTheme,
           // home: Scaffold(
@@ -102,7 +107,7 @@ class MyAppView extends StatelessWidget {
           //     ],
           //   ),
           // ),
-        );
+        // );
       },
     );
   }

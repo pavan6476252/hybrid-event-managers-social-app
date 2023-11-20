@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -16,9 +17,9 @@ part 'profile_state.dart';
 class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
-      if (event is ProfileInitialEvent) {
-        emit(ProfileInitial());
-      }
+      // if (event is ProfileInitialEvent) {
+      //   emit(ProfileInitial());
+      // }
       if (event is ProfileUpdateEvent) {
         await _editProfileInfo(event, emit);
       }
@@ -53,13 +54,13 @@ class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
 
     try {
-      await FireStoreServices().editProfileInfo(
+      UserModel userModel = await FireStoreServices().editProfileInfo(
           prfileImage: event.profileImage,
           bannerImage: event.bannerImage,
           uid: FirebaseAuth.instance.currentUser?.uid ?? "",
           userModel: event.userModel);
 
-      emit(ProfileLoaded(userModel: event.userModel));
+      emit(ProfileLoaded(userModel: userModel));
     } on FirebaseException catch (e) {
       print("error" + e.toString());
       emit(ProfileFailed(errorMsg: e.toString()));
@@ -68,23 +69,19 @@ class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
 
   @override
   ProfileState? fromJson(Map<String, dynamic> json) {
-    print("[Profile bloc from json]");
-    print(json);
-    if (json["profile"] != null) {
-      return ProfileLoaded(
-          userModel:
-              UserModel.fromMap(json["profile"] as Map<String, dynamic>));
-    } else {
-      add(ProfileGetEvent());
+    if (json.isNotEmpty) {
+      print("here");
+      return ProfileLoaded(userModel: UserModel.fromJson(json));
     }
+    return null;
+
   }
 
   @override
   Map<String, dynamic>? toJson(ProfileState state) {
-    print(state);
     if (state is ProfileLoaded) {
       print("[Profile bloc to json]");
-      return {"profile ": state.userModel.toMap()};
+      return state.userModel.toMap();
     }
     //   if (state is ProfileInitial) {
     //   add(ProfileGetEvent());

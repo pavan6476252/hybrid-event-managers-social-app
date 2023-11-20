@@ -44,7 +44,7 @@ class AppRouter {
             ),
             GoRoute(
               path: UserDetailsGatheringScreen.pathRoute,
-              builder: (context, state) => const UserDetailsGatheringScreen(),
+              builder: (context, state) =>  UserDetailsGatheringScreen(),
             ),
             GoRoute(
               path: HomeScreen.pathRoute,

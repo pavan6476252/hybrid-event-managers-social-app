@@ -1,4 +1,47 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- Internet permission for network access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Network state permission for checking network connectivity -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Access fine location permission for location-based features -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Access coarse location permission for less precise location-based features -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Camera permission for capturing photos and videos -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Write external storage permission for saving media files -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Read external storage permission for reading media files -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Record audio permission for audio-related features -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Read contacts permission for accessing user contacts -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- Write contacts permission for modifying user contacts -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <!-- Use fingerprint permission for biometric authentication -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <!-- Receive SMS permission for phone number verification -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <!-- Send SMS permission for sending messages -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!-- Call phone permission for making phone calls -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    
     <application
         android:label="hybrid"
         android:name="${applicationName}"

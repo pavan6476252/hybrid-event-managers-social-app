@@ -15,11 +15,13 @@ class FireStoreServices {
 
   //profile Info
 
-  Future<void> editProfileInfo(
+  Future<UserModel> editProfileInfo(
       {required String uid,
       required UserModel userModel,
       File? prfileImage,
       File? bannerImage}) async {
+
+        print("firebase call");
     if (prfileImage != null) {
       String imageUrl = await storageServices.uploadFileToFirebaseStorage(
           file: prfileImage, location: FirebaseConstants.profiles);
@@ -33,10 +35,12 @@ class FireStoreServices {
       userModel = userModel.copyWith(coverImageUrl: coverImage);
     }
 
-    return firebaseFirestore
+     firebaseFirestore
         .collection(FirebaseConstants.profiles)
         .doc(uid)
         .set(userModel.toMap());
+
+        return userModel;
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getProfileInfo(
