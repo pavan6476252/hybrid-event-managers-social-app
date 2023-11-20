@@ -6,10 +6,16 @@ sealed class ProfileEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+class ProfileInitialEvent extends ProfileEvent{
+
+}
 
 class ProfileUpdateEvent extends ProfileEvent {
   final UserModel userModel;
-  const ProfileUpdateEvent({required this.userModel});
+  final File? profileImage;
+  final File? bannerImage;
+  const ProfileUpdateEvent(
+      {required this.userModel, this.profileImage, this.bannerImage});
 }
 
 class ProfileGetEvent extends ProfileEvent {

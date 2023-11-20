@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -13,6 +16,9 @@ part 'profile_state.dart';
 class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
+      if (event is ProfileInitialEvent) {
+        emit(ProfileInitial());
+      }
       if (event is ProfileUpdateEvent) {
         await _editProfileInfo(event, emit);
       }
@@ -48,11 +54,14 @@ class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
 
     try {
       await FireStoreServices().editProfileInfo(
+          prfileImage: event.profileImage,
+          bannerImage: event.bannerImage,
           uid: FirebaseAuth.instance.currentUser?.uid ?? "",
           userModel: event.userModel);
 
       emit(ProfileLoaded(userModel: event.userModel));
     } on FirebaseException catch (e) {
+      print("error" + e.toString());
       emit(ProfileFailed(errorMsg: e.toString()));
     }
   }

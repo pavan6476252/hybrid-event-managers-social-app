@@ -29,8 +29,8 @@ class UserModel {
     this.geoPoint,
     this.phoneNumber,
     this.birthdate,
-    required this.followers,
-    required this.following,
+      this.followers,
+      this.following,
   });
 
   Map<String, dynamic> toMap() {
@@ -81,4 +81,34 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  UserModel copyWith({
+    String? userId,
+    String? username,
+    String? fullName,
+    String? email,
+    String? bio,
+    String? profileImageUrl,
+    String? coverImageUrl,
+    String? phoneNumber,
+    GeoPoint? geoPoint,
+    DateTime? birthdate,
+    List<String>? followers,
+    List<String>? following,
+  }) {
+    return UserModel(
+      userId: userId ?? this.userId,
+      username: username ?? this.username,
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      bio: bio ?? this.bio,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      coverImageUrl: coverImageUrl ?? this.coverImageUrl,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      geoPoint: geoPoint ?? this.geoPoint,
+      birthdate: birthdate ?? this.birthdate,
+      followers: followers ?? this.followers,
+      following: following ?? this.following,
+    );
+  }
 }

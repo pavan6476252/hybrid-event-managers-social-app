@@ -8,30 +8,13 @@ import 'package:hybrid/features/home/home_view.dart';
 
 class AppRouter {
   static GoRouter goRouter(AuthBloc authBloc) => GoRouter(
-          // initialLocation: LoginScreen.pathRoute,
+        
           initialLocation: '/',
           refreshListenable: BlocListenable(authBloc),
           redirect: (context, state) {
             print("[auth-state] ${authBloc.state} == [fullpath] ${state.fullPath}");
 
-            // if (authBloc.state is Authenticated &&
-            //     state.path == LoginScreen.pathRoute) {
-            //   return HomeScreen.pathRoute;
-            // }
-            // // if(
-            // //   authBloc.state == Authenticated && state.path !
-            // // ){
-
-            // // }
-
-            // else if (authBloc.state is UnAuthenticated &&
-            //     state.path != LoginScreen.pathRoute) {
-            //   return LoginScreen.pathRoute;
-            // }
-
-            // // if (authBloc.state is Authenticated) {
-            //   return state.path;
-            // // }
+           
             if(state.fullPath=='/'){
               return LoginScreen.pathRoute;
             }

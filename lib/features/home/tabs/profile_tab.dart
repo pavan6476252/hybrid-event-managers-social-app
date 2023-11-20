@@ -56,13 +56,13 @@ class _ProfileTabState extends State<ProfileTab> {
             );
           }
           if (state is ProfileDoesNotExists) {
-         return   Center(
-              child: TextButton(
-                  onPressed: () {
-                    context.push(UserDetailsGatheringScreen.pathRoute);
-                  },
-                  child: Text("Profile doesn't exists Create Now")),
-            );
+            return Center(
+                  child: TextButton(
+                      onPressed: () {
+                        context.push(UserDetailsGatheringScreen.pathRoute);
+                      },
+                      child: Text("Profile doesn't exists Create Now")),
+                );
           }
           if (state is ProfileLoaded) {
             return Stack(
