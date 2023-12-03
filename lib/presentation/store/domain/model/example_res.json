@@ -1,0 +1,50 @@
+{
+    "offers": [
+        {
+            "_id": "656455d47ab76404afe9056f",
+            "name": "Refined Granite Bike",
+            "description": "Cado audio cursus certus.",
+            "image": "https://via.placeholder.com/3143x3226/19ab99/0d3e2c.gif?text=sufficio%20abundans%20viriliter",
+            "discountPercentage": 33,
+            "startDate": "2024-07-30T13:14:14.784Z",
+            "endDate": "2024-05-31T19:16:16.569Z",
+            "__v": 0,
+            "createdAt": "2023-11-27T08:39:48.736Z",
+            "updatedAt": "2023-11-27T08:39:48.736Z"
+        }
+    ],
+    "recomended": [],
+    "categories": [
+        {
+            "_id": "65644df94c4e731fb81b74f2",
+            "name": "Baby",
+            "description": "Desolo tendo delibero defendo utor tredecim advoco denuo dapifer.",
+            "image": "https://loremflickr.com/640/480/fashion",
+            "__v": 0,
+            "createdAt": "2023-11-27T08:06:17.309Z",
+            "updatedAt": "2023-11-27T08:06:17.309Z"
+        }
+    ],
+    "popular": [
+        {
+            "_id": "65646620c8aac8029760fa91",
+            "author": "655eec91e48046469ff28b88",
+            "name": "Gorgeous Rubber Pizza",
+            "description": "Avarus sit usque aro curis clam.",
+            "price": 69,
+            "quantityAvailable": 40,
+            "imageUrls": [
+                "https://picsum.photos/seed/dS7FLB0L/640/480"
+            ],
+            "category": [
+                "65644df94c4e731fb81b74eb"
+            ],
+            "offers": [
+                "656455d47ab76404afe9056f"
+            ],
+            "__v": 0,
+            "createdAt": "2023-11-27T09:49:20.306Z",
+            "updatedAt": "2023-11-27T09:49:20.306Z"
+        }
+    ]
+}
