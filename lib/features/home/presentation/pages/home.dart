@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hybrid/features/home/presentation/widgets/app_drawer.dart';
+import 'package:hybrid/features/posts/presentation/pages/create_post_view.dart';
 import 'package:hybrid/features/posts/presentation/pages/homePostsFeed.dart';
 import 'package:hybrid/features/store/presentation/pages/storeHomeView.dart';
 import 'package:hybrid/features/tutorials/presentation/pages/TutorialsHomeView.dart';
@@ -17,51 +19,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Hybrid'),
-      // ),
-      body: [
-        HomePostsFeed(),
-        const StoreHomeView(),
-        TutorialsHomeView()
+      appBar: [
+        AppBar(
+          title: const Text("Feed"),
+        ),
+        AppBar(
+          title: const Text("Store"),
+        ),
+        AppBar(
+          title: const Text("Tutorial"),
+        ),
       ][currentPageIndex],
-      //  BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      //   builder: (context, state) {
-      //     if (state is AuthenticatedState) {
-      //       return Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Text('Welcome, ${state.user.displayName}'),
-      //           ElevatedButton(
-      //             onPressed: () {
-      //               context.read<AuthenticationBloc>().add(SignOutEvent());
-      //             },
-      //             child: const Text('Sign Out'),
-      //           ),
-      //         ],
-      //       );
-      //     } else {
-      //       return Center(
-      //         child: ElevatedButton(
-      //           onPressed: () {
-      //             context
-      //                 .read<AuthenticationBloc>()
-      //                 .add(SignInWithGoogleEvent());
-      //           },
-      //           child: const Text('Sign In with Google'),
-      //         ),
-      //       );
-      //     }
-      //   },
-      // ),
-      // floatingActionButton: ElevatedButton(
-      //   onPressed: () {},
-      //   child: const Row(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [Icon(Icons.add), SizedBox(width: 8), Text("Post")],
-      //   ),
-      // ),
-
+      drawer: CustomDrawer(),
+      floatingActionButton: currentPageIndex == 0
+          ? FloatingActionButton.extended(
+              extendedPadding:
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+              onPressed: () {
+                Navigator.pushNamed(context, CreatePostView.pathName);
+              },
+              label: const Row(
+                children: [Icon(Icons.add), SizedBox(width: 10), Text("Post")],
+              ),
+            )
+          : null,
+      body: [
+        const HomePostsFeed(),
+        const StoreHomeView(),
+        const TutorialsHomeView()
+      ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         selectedIndex: currentPageIndex,

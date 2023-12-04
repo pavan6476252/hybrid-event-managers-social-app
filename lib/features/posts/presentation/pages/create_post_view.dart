@@ -1,16 +1,21 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hybrid/features/posts/domain/model/post_model.dart';
+import 'package:hybrid/features/posts/presentation/bloc/post_creating/post_creating_bloc.dart';
+import 'package:hybrid/utils/scaffold_sevices.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CreataPostView extends StatefulWidget {
-  const CreataPostView({Key? key}) : super(key: key);
+class CreatePostView extends StatefulWidget {
+  static String pathName = '/create-post';
+  const CreatePostView({Key? key}) : super(key: key);
 
   @override
-  _CreataPostViewState createState() => _CreataPostViewState();
+  _CreatePostViewState createState() => _CreatePostViewState();
 }
 
-class _CreataPostViewState extends State<CreataPostView> {
+class _CreatePostViewState extends State<CreatePostView> {
   List<File> selectedImages = [];
 
   Future<void> pickImages(context) async {
@@ -45,16 +50,6 @@ class _CreataPostViewState extends State<CreataPostView> {
 
   List<ItemModel> itemsList = [];
 
-  // FormData formData = FormData();
-  // postPost(){
-  //   formData.append("description", value)
-  //   formData.append("itemsList", value)
-  //   formData.append("isBuySell", value)
-  //   for (File image in selectedImages){
-
-  //   formData.appendBlob("images", image);
-  //   }
-  // }
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -62,6 +57,7 @@ class _CreataPostViewState extends State<CreataPostView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Post'),
+        actions: [_postUploadButton(context), SizedBox(width: 15)],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -294,6 +290,43 @@ class _CreataPostViewState extends State<CreataPostView> {
             ),
           ],
         );
+      },
+    );
+  }
+
+  _postUploadButton(BuildContext context) {
+    return BlocConsumer<PostCreatingBloc, PostCreatingState>(
+      listener: (context, state) {
+        if (state is PostCreatingFailed) {
+          log("error : ${state.failure.stackTrace}");
+          ScaffoldMessageService.showScaffold(
+              context: context, title: "Post creating failed", error: true);
+        }
+        if (state is PostCreatingSuccess) {
+          ScaffoldMessageService.showScaffold(
+            context: context,
+            title: "Post uploaded Successfully",
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is PostCreatingLoading) {
+          return const SizedBox(
+              height: 25, width: 25, child: CircularProgressIndicator());
+        }
+        return IconButton(
+            onPressed: () {
+              context.read<PostCreatingBloc>().add(PostThePostEvent(
+                    isBuySell: isBuySell,
+                    description: descriptionController.text,
+                    images: selectedImages,
+                    items: itemsList,
+                  ));
+            },
+            icon: const Icon(
+              Icons.send,
+              color: Colors.black,
+            ));
       },
     );
   }

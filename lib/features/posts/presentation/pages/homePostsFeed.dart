@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hybrid/features/posts/presentation/bloc/feed_posts_bloc.dart';
+import 'package:hybrid/features/posts/presentation/bloc/feed_post/feed_posts_bloc.dart';
 import 'package:hybrid/features/posts/presentation/pages/create_post_view.dart';
 import 'package:hybrid/features/posts/presentation/widget/post_card.dart';
 
@@ -52,23 +52,8 @@ class _HomePostsFeedState extends State<HomePostsFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Feed"),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        extendedPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreataPostView(),
-              ));
-        },
-        label: const Row(
-          children: [Icon(Icons.add), SizedBox(width: 10), Text("Post")],
-        ),
-      ),
+    
+    
       body: BlocConsumer<FeedPostsBloc, FeedPostsState>(
         listener: (context, state) {},
         builder: (context, state) {

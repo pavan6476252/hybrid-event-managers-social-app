@@ -10,7 +10,7 @@ class ScaffoldMessageService {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: error ? color.error : null,
         content: Text(
-          "title",
+          title,
           style: TextStyle(
             color: error ? color.onError : null,
           ),

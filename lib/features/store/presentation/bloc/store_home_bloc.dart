@@ -21,9 +21,9 @@ class StoreHomeBloc extends Bloc<StoreHomeEvent, StoreHomeState> {
     res.fold((failure) {
       emit(StoreHomeFailed(failure: failure));
     }, (response) {
-      print(response.body);
+      print(response.data);
       emit(StoreHomeLoaded(StoreHomeModel.fromJson(
-          jsonDecode(response.body) as Map<String, dynamic>)));
+          (response.data) as Map<String, dynamic>)));
     });
   }
 }

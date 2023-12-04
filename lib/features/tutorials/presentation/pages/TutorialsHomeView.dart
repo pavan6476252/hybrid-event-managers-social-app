@@ -13,11 +13,7 @@ class TutorialsHomeView extends StatefulWidget {
 class _TutorialsHomeViewState extends State<TutorialsHomeView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tutorial"),
-      ),
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Column(
           children: [
             TutorialYTBanner(),
@@ -25,7 +21,7 @@ class _TutorialsHomeViewState extends State<TutorialsHomeView> {
             ListAllTutorialsWidget()
           ],
         ),
-      ),
+      
     );
   }
 }
