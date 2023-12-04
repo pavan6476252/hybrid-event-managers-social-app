@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hybrid/core/api.dart';
 import 'package:hybrid/core/api_repo_impl.dart';
+import 'package:hybrid/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:hybrid/features/auth/data/source/auth_remote_data_source.dart';
+import 'package:hybrid/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:hybrid/features/auth/presentation/pages/login.dart';
+import 'package:hybrid/features/home/presentation/pages/home.dart';
+import 'package:hybrid/features/posts/presentation/bloc/feed_posts_bloc.dart';
+import 'package:hybrid/features/store/presentation/bloc/store_home_bloc.dart';
 import 'package:hybrid/firebase_options.dart';
-import 'package:hybrid/presentation/auth/data/repository/auth_repository_impl.dart';
-import 'package:hybrid/presentation/auth/data/source/auth_remote_data_source.dart';
-import 'package:hybrid/presentation/auth/presentation/bloc/auth_bloc.dart';
-import 'package:hybrid/presentation/auth/presentation/pages/login.dart';
-import 'package:hybrid/presentation/home/presentation/pages/home.dart';
-import 'package:hybrid/presentation/posts/presentation/bloc/feed_posts_bloc.dart';
-import 'package:hybrid/presentation/store/presentation/bloc/store_home_bloc.dart';
+import 'package:hybrid/utils/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent)),
       home: MultiBlocProvider(providers: [
         BlocProvider(
             create: (context) =>
@@ -66,27 +69,5 @@ class AuthStateManager extends StatelessWidget {
         }
       },
     );
-  }
-}
-
-
-
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object? event) {
-    super.onEvent(bloc, event);
-    print('${bloc.runtimeType} $event');
-  }
-
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    print('${bloc.runtimeType} $change');
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print('${bloc.runtimeType} $transition');
   }
 }
